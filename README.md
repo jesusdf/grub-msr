@@ -12,11 +12,11 @@ Installation
 
     4. Edit the file /etc/grub.d/40_custom loading the module and making the tweaks that you want to apply, for example:
 
-        \#!/bin/sh
+        #!/bin/sh
         exec tail -n +3 $0
-        \# This file provides an easy way to add custom menu entries.  Simply type the
-        \# menu entries you want to add after this comment.  Be careful not to change
-        \# the 'exec tail' line above.
+        # This file provides an easy way to add custom menu entries.  Simply type the
+        # menu entries you want to add after this comment.  Be careful not to change
+        # the 'exec tail' line above.
          
         insmod msr
         wrmsr 0x19A 0x1
