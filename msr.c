@@ -27,9 +27,6 @@
 #include <grub/i386/msr.h>
 #include <grub/i18n.h>
 
-char modname[] __attribute__((section(".modname"))) = "msr";
-char moddeps[] __attribute__((section(".moddeps"))) = "extcmd";
-
 GRUB_MOD_LICENSE("GPLv3+");
 
 static const struct grub_arg_option options[] =
@@ -40,7 +37,7 @@ static const struct grub_arg_option options[] =
 };
 
 static grub_err_t
-grub_cmd_msr_read(grub_command_t cmd, int argc, char **argv)
+grub_cmd_msr_read(grub_extcmd_context_t ctxt, int argc, char **argv)
 {
   grub_uint64_t addr;
   grub_uint64_t value;
@@ -57,12 +54,12 @@ grub_cmd_msr_read(grub_command_t cmd, int argc, char **argv)
 
   if (ctxt->state[0].set)
   {
-    grub_snprintf(buf, sizeof(buf), "%x", value);
+    grub_snprintf(buf, sizeof(buf), "%llx", value);
     grub_env_set(ctxt->state[0].arg, buf);
   }
   else
   {
-    grub_printf("0x%x\n", value);
+    grub_printf("0x%llx\n", value);
   }
 
   return GRUB_ERR_NONE;
@@ -97,7 +94,7 @@ GRUB_MOD_INIT(msr)
                                   N_("Read a CPU model specific register."),
                                   options);
 
-  cmd_write = grub_register_extcmd("wrmsr", grub_cmd_msr_write, 0,
+  cmd_write = grub_register_command("wrmsr", grub_cmd_msr_write,
                                    N_("ADDR VALUE"),
                                    N_("Write a value to a CPU model specific register."));
 }
@@ -105,5 +102,5 @@ GRUB_MOD_INIT(msr)
 GRUB_MOD_FINI(msr)
 {
   grub_unregister_extcmd(cmd_read);
-  grub_unregister_extcmd(cmd_write);
+  grub_unregister_command(cmd_write);
 }

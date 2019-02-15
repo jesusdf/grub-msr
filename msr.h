@@ -26,15 +26,17 @@
  */
 
 #ifndef GRUB_CPU_MSR_HEADER
-#define GRUB_CPU_MSR_HEADER 1
+	#define GRUB_CPU_MSR_HEADER 1
+#endif
 
-extern unsigned char grub_msr_read;
-extern unsigned char grub_msr_write;
+/*
+extern grub_uint64_t grub_msr_read(grub_uint64_t msr_id);
+extern void grub_msr_write(grub_uint64_t msr, grub_uint64_t value);
+*/
 
 #ifdef __x86_64__
 
-static __inline grub_uint64_t
-grub_msr_read (grub_uint64_t msr_id)
+extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 {
     grub_uint32_t low;
     grub_uint32_t high;
@@ -45,8 +47,7 @@ grub_msr_read (grub_uint64_t msr_id)
     return ((grub_uint64_t)high << 32) | low;
 }
 
-static __inline void 
-grub_msr_write(grub_uint64_t msr, grub_uint64_t value)
+extern __inline void grub_msr_write(grub_uint64_t msr, grub_uint64_t value)
 {
 	grub_uint32_t low = value & 0xFFFFFFFF;
 	grub_uint32_t high = value >> 32;
@@ -59,22 +60,21 @@ grub_msr_write(grub_uint64_t msr, grub_uint64_t value)
 
 #else
 
-static __inline grub_uint64_t
-grub_msr_read (grub_uint64_t msr_id)
+extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 {
-	/* We use uint64 in msr_id just to keep the same function definition as the amd64 version. */
-	grub_uint32_t low = msr_id & 0xFFFFFFFF;
+	/* We use uint64 in msr_id just to keep the same function signature */
+    grub_uint32_t low_id = msr_id & 0xFFFFFFFF;
     grub_uint64_t msr_value;
-    __asm__ __volatile__ ( "rdmsr" : "=A" (msr_value) : "c" (low) );
+    __asm__ __volatile__ ( "rdmsr" : "=A" (msr_value) : "c" (low_id) );
     return msr_value;
 }
 
-static __inline void 
-grub_msr_write(grub_uint64_t msr_id, uint64_t msr_value)
+extern __inline void grub_msr_write(grub_uint64_t msr_id, grub_uint64_t msr_value)
 {
-	/* We use uint64 in msr_id just to keep the same function definition as the amd64 version. */
-	grub_uint32_t low = msr_id & 0xFFFFFFFF;
-    __asm__ __volatile__ ( "wrmsr" : : "c" (low), "A" (msr_value) );
+	/* We use uint64 in msr_id just to keep the same function signature */
+	grub_uint32_t low_id = msr_id & 0xFFFFFFFF;
+	grub_uint32_t low_value = msr_value & 0xFFFFFFFF;
+    __asm__ __volatile__ ( "wrmsr" : : "c" (low_id), "A" (low_value) );
 }
 
 #endif

@@ -1,0 +1,10 @@
+
+
+module = {
+  name = msr;
+  common = commands/i386/msr.c;
+  enable = x86;
+  enable = i386_xen_pvh;
+  enable = i386_xen;
+  enable = x86_64_xen;
+};
