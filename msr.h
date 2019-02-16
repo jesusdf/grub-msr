@@ -16,18 +16,6 @@
  *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * grub msr module
- * Allows reading and writing to model-specific registers.
- * Jesús Diéguez Fernández
- *
- * Main structure inspired by memrw.c and cpuid.c, assembly code adapted from:
- *
- *	https://wiki.osdev.org/Inline_Assembly/Examples#RDMSR
- *	https://wiki.osdev.org/Inline_Assembly/Examples#WRMSR
- *
- */
-
 #ifndef GRUB_CPU_MSR_HEADER
 #define GRUB_CPU_MSR_HEADER 1
 #endif
