@@ -85,7 +85,7 @@ grub_cmd_msr_write(grub_command_t cmd, int argc, char **argv)
 }
 
 static grub_extcmd_t cmd_read;
-static grub_extcmd_t cmd_write;
+static grub_command_t cmd_write;
 
 GRUB_MOD_INIT(msr)
 {
