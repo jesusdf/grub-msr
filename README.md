@@ -23,21 +23,24 @@ Installation
       It will perform the following operations:
     
         1. Copy the file /usr/src/grub/grub-core/msr.mod to /boot/grub/i386-pc/
-        2. Add the following line to the end of /boot/grub/i386-pc/command.lst:
+        2. Add the following lines to the end of /boot/grub/i386-pc/command.lst:
     
-            msr: msr
+            *rdmsr: msr
+            wrmsr: msr
         
-        3. Edit the file /etc/grub.d/40_custom loading the module and anything else that you need:
+        3. Do the previous operations under the /usr/lib/grub/i386-pc folder if it exists.
+        4. Edit the file /etc/grub.d/40_custom loading the module and anything else that you need:
         
             #!/bin/sh
             exec tail -n +3 $0
             # This file provides an easy way to add custom menu entries.  Simply type the
             # menu entries you want to add after this comment.  Be careful not to change
             # the 'exec tail' line above.
-             
+            
             insmod msr
-            wrmsr 0x19A 0x1
-    
+            wrmsr 0x19A 0x12
+            rmmod msr
+        
         4. Update the grub configuration using:
     
             update-grub
