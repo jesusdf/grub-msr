@@ -17,9 +17,9 @@ Files
 -----
 
     grub-core/commands/i386/rdmsr.c	- Registration of the rdmsr command.
-    include/grub/i386/rdmsr.h		- Assembly functions to read from the MSR.
+    include/grub/i386/rdmsr.h	- Assembly functions to read from the MSR.
     grub-core/commands/i386/rdmsr.c	- Registration of the wrmsr command.
-    include/grub/i386/wrmsr.h		- Assembly functions to write to the MSR.
+    include/grub/i386/wrmsr.h	- Assembly functions to write to the MSR.
 
 Installation
 ------------
@@ -58,7 +58,8 @@ Installation
 Usage
 -----
 
-    Once the rdmsr/wrmsr modules are loaded, two new commands are availiable for reading and writing to the MSR:
+    Once the rdmsr/wrmsr modules are loaded, two new commands are availiable 
+    for reading and writing to the MSR:
 
         rdmsr 0xADDRESS
         wrmsr 0xADDRESS 0xVALUE
