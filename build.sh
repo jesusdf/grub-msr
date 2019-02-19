@@ -18,5 +18,5 @@ echo "Building..."
 ./linguas.sh
 ./autogen.sh
 # http://www.linuxfromscratch.org/lfs/view/development/chapter06/grub.html
-./configure --prefix=/usr --sbindir=/sbin --sysconfdir=/etc --disable-efiemu --disable-werror && make && ls --color ./grub-core/msr.*
+./configure --prefix=/usr --sbindir=/sbin --sysconfdir=/etc --disable-efiemu --disable-werror && make && ls --color ./grub-core/*msr.*
 
