@@ -1,9 +1,9 @@
 # grub-msr
 grub2 msr modules to read (rdmsr) or write (wrmsr) from/to model-specific registers.
 
-It allows to make changes to the MSR before any OS boots:
+It allows you to make changes to the MSR before any OS boots:
 
-![CPU-Z comparison](https://github.com/jesusdf/grub-msr/cpuz.jpg "CPU-Z comparison")
+![CPU-Z comparison](https://github.com/jesusdf/grub-msr/blob/master/cpuz.jpg?raw=true "CPU-Z comparison")
 
 In this example a Core 2 Extreme CPU is tweaked to allow a higher multiplier than stock.
 
