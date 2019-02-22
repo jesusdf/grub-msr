@@ -26,7 +26,7 @@ extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 {
     grub_uint32_t low, high;
 
-    asm volatile ( "rdmsr"  : "=a"(low), "=d"(high) : "c"(msr) );
+    asm volatile ( "rdmsr"  : "=a"(low), "=d"(high) : "c"(msr_id) );
 
     return ((grub_uint64_t)high << 32) | low;
 }
@@ -36,7 +36,7 @@ extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 {
     /* We use uint64 in msr_id just to keep the same function signature. */
-    grub_uint32_t msr_value, low_id = msr_id & 0xFFFFFFFF;
+    grub_uint32_t msr_value, low_id = msr_id;
 
     asm volatile ( "rdmsr" : "=A" (msr_value) : "c" (low_id) );
 
