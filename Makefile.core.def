@@ -1,5 +1,3 @@
-
-
 module = {
   name = rdmsr;
   common = commands/i386/rdmsr.c;
