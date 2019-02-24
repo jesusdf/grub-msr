@@ -34,9 +34,9 @@ extern __inline void grub_msr_write(grub_uint64_t msr, grub_uint64_t value)
 extern __inline void grub_msr_write(grub_uint64_t msr_id, grub_uint64_t msr_value)
 {
     /* We use uint64 in msr_id just to keep the same function signature. */
-    grub_uint32_t low_id = msr_id, low_value = msr_value;
+    grub_uint32_t low_id = msr_id;
 
-    asm volatile ( "wrmsr" : : "c" (low_id), "A" (low_value) );
+    asm volatile ( "wrmsr" : : "c" (low_id), "A" (msr_value) );
 }
 
 #endif

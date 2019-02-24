@@ -36,7 +36,8 @@ extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 extern __inline grub_uint64_t grub_msr_read (grub_uint64_t msr_id)
 {
     /* We use uint64 in msr_id just to keep the same function signature. */
-    grub_uint32_t msr_value, low_id = msr_id;
+    grub_uint64_t msr_value;
+    grub_uint32_t low_id = msr_id;
 
     asm volatile ( "rdmsr" : "=A" (msr_value) : "c" (low_id) );
 
