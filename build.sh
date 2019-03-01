@@ -14,6 +14,8 @@ echo "Patching __asm__ and __volatile__..."
 #find ./ -type f -name \*.[ch] -exec sed -i 's/__asm__/    asm/g;s/__volatile__/    volatile/g;' {} \;
 #find ./ -type f -name \*.[ch] -exec sed -i 's/    asm     volatile/asm volatile/g;' {} \;
 find ./ -type f -name \*.[ch] -exec sed -i 's/__asm__ __volatile__/asm volatile/g;' {} \;
+echo "Press enter key to continue..."
+read
 echo "Including the wrmsr module in the EFI disabled module list..."
 sed -i "s/\"memrw\", NULL/\"memrw\", \"wrmsr\", NULL/g" /usr/src/grub/grub-core/commands/efi/shim_lock.c
 echo "Adding new rdmsr and wrmsr modules..."
@@ -22,6 +24,14 @@ cp $ORIG/*.h ./include/grub/i386/
 if [ "$(cat ./grub-core/Makefile.core.def | grep msr | wc -l)" -eq "0" ]; then
     cat $ORIG/Makefile.core.def >> ./grub-core/Makefile.core.def
 fi
+echo "Press enter key to continue..."
+read
+echo "Patching documentation..."
+cd docs
+patch < $ORIG/doc.patch
+cd ..
+echo "Press enter key to continue..."
+read
 echo "Building..."
 ./linguas.sh
 ./autogen.sh
