@@ -50,7 +50,7 @@ grub_cmd_msr_write (grub_command_t cmd, int argc, char **argv)
         return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("invalid argument"));
 
     ptr = argv[1];
-    value = grub_strtoul (ptr, &ptr, 0);
+    value = grub_strtoull (ptr, &ptr, 0);
 
     if (grub_errno != GRUB_ERR_NONE)
         return grub_errno;
