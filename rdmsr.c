@@ -41,7 +41,8 @@ static const struct grub_arg_option options[] =
 static grub_err_t
 grub_cmd_msr_read (grub_extcmd_context_t ctxt, int argc, char **argv)
 {
-    grub_uint64_t addr, value;
+    grub_uint32_t addr;
+    grub_uint64_t value;
     char *ptr;
     char buf[sizeof("XXXXXXXX")];
 
