@@ -35,7 +35,7 @@ read
 echo "Building..."
 ./bootstrap
 ./linguas.sh
-echo "es" po/LINGUAS
+echo "es" > po/LINGUAS
 ./autogen.sh
 # http://www.linuxfromscratch.org/lfs/view/development/chapter06/grub.html
 ./configure --prefix=/usr --sbindir=/sbin --sysconfdir=/etc --disable-efiemu --disable-werror && make && ls --color ./grub-core/*msr.*
