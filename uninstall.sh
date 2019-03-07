@@ -1,9 +1,10 @@
 #!/bin/bash
 SCRIPT=$(realpath $0)
 ORIG=$(dirname $SCRIPT)
+DEST=$ORIG
 
-if [ -d "/usr/src/grub" ]; then
-    rm -rf /usr/src/grub
+if [ -d "$DEST/grub" ]; then
+    rm -rf $DEST/grub
 fi
 
 rm -f /boot/grub/i386-pc/*msr.mod

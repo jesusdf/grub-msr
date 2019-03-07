@@ -1,10 +1,11 @@
 #!/bin/bash
 SCRIPT=$(realpath $0)
 ORIG=$(dirname $SCRIPT)
-cd /usr/src
+DEST=$ORIG
+cd $DEST
 #apt-get source grub-pc
-if [ -d /usr/src/grub ]; then
-    rm -rf /usr/src/grub
+if [ -d $DEST/grub ]; then
+    rm -rf $DEST/grub
 fi
 echo "Downloading grub source code..."
 git clone git://git.savannah.gnu.org/grub.git
@@ -17,7 +18,7 @@ find ./ -type f -name \*.[ch] -exec sed -i 's/__asm__ __volatile__/asm volatile/
 echo "Press enter key to continue..."
 read
 echo "Including the wrmsr module in the EFI disabled module list..."
-sed -i "s/\"memrw\", NULL/\"memrw\", \"wrmsr\", NULL/g" /usr/src/grub/grub-core/commands/efi/shim_lock.c
+sed -i "s/\"memrw\", NULL/\"memrw\", \"wrmsr\", NULL/g" $DEST/grub/grub-core/commands/efi/shim_lock.c
 echo "Adding new rdmsr and wrmsr modules..."
 cp $ORIG/*.c ./grub-core/commands/i386/
 cp $ORIG/*.h ./include/grub/i386/
