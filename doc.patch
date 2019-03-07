@@ -1,5 +1,5 @@
---- grub.texi	2019-03-01 16:00:58.195244436 +0100
-+++ grub.texi	2019-03-01 16:42:57.618581863 +0100
+--- grub.texi	2019-03-07 23:16:41.936942741 +0100
++++ grub.texi	2019-03-07 23:36:24.682714121 +0100
 @@ -3931,6 +3931,7 @@
  * play::                        Play a tune
  * probe::                       Retrieve device info
@@ -16,7 +16,7 @@
  * xen_hypervisor::              Load xen hypervisor binary (only on AArch64)
  * xen_module::                  Load xen modules for xen hypervisor (only on AArch64)
  @end menu
-@@ -4785,6 +4787,20 @@
+@@ -4785,6 +4787,24 @@
  @end deffn
  
  
@@ -31,13 +31,17 @@
 +Please note that on SMP systems, reading from a MSR that has a
 +scope per hardware thread, implies that the value that is returned
 +only applies to the particular cpu/core/thread that runs the command.
++
++Also, if you specify a reserved or unimplemented MSR address, it will 
++cause a general protection exception (which is not currently being handled)
++and the system will reboot.
 +@end deffn
 +
 +
  @node read
  @subsection read
  
-@@ -5223,6 +5239,17 @@
+@@ -5223,6 +5243,21 @@
  List available video modes. If resolution is given, show only matching modes.
  @end deffn
  
@@ -50,12 +54,16 @@
 +Please note that on SMP systems, writing to a MSR that has a scope 
 +per hardware thread, implies that the value that is written
 +only applies to the particular cpu/core/thread that runs the command.
++
++Also, if you specify a reserved or unimplemented MSR address, it will 
++cause a general protection exception (which is not currently being handled)
++and the system will reboot.
 +@end deffn
 +
  @node xen_hypervisor
  @subsection xen_hypervisor
  
-@@ -5716,11 +5743,11 @@
+@@ -5716,11 +5751,11 @@
  is recommend to build in this and other required modules into the @file{core.img}.
  All modules not stored in the @file{core.img} and the ACPI tables for the
  @command{acpi} command have to be signed, e.g. using PGP. Additionally, the
@@ -72,7 +80,7 @@
  
  @node Measured Boot
  @section Measuring boot components
-@@ -5831,6 +5858,8 @@
+@@ -5831,6 +5866,8 @@
  @item USB                @tab yes     @tab yes      @tab yes          @tab yes
  @item chainloader        @tab local   @tab yes      @tab yes          @tab no
  @item cpuid              @tab partial @tab partial  @tab partial      @tab partial
@@ -81,7 +89,7 @@
  @item hints              @tab guess   @tab guess    @tab guess        @tab guess
  @item PCI                @tab yes     @tab yes      @tab yes          @tab yes
  @item badram             @tab yes     @tab yes      @tab yes          @tab yes
-@@ -5850,6 +5879,8 @@
+@@ -5850,6 +5887,8 @@
  @item USB                @tab yes         @tab yes       @tab yes           @tab no
  @item chainloader        @tab local       @tab local     @tab no            @tab local
  @item cpuid              @tab partial     @tab partial   @tab partial       @tab no
@@ -90,7 +98,7 @@
  @item hints              @tab guess       @tab guess     @tab good          @tab guess
  @item PCI                @tab yes         @tab yes       @tab yes           @tab no
  @item badram             @tab yes         @tab yes       @tab no            @tab yes
-@@ -5869,6 +5900,8 @@
+@@ -5869,6 +5908,8 @@
  @item USB                @tab yes         @tab no      @tab no      @tab no
  @item chainloader        @tab yes         @tab no      @tab no      @tab no
  @item cpuid              @tab no          @tab no      @tab no      @tab no
@@ -99,7 +107,7 @@
  @item hints              @tab good        @tab good    @tab good    @tab no
  @item PCI                @tab yes         @tab no      @tab no      @tab no
  @item badram             @tab yes (*)     @tab no      @tab no      @tab no
-@@ -5888,6 +5921,8 @@
+@@ -5888,6 +5929,8 @@
  @item USB                @tab N/A       @tab yes         @tab no
  @item chainloader        @tab yes       @tab no          @tab yes
  @item cpuid              @tab no        @tab no          @tab yes
