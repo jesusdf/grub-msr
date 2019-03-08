@@ -1,0 +1,33 @@
+This patch series consist in a code cleanup and two new modules to access MSR:
+
+The first patch replaces __asm__ __volatile__ with asm volatile.
+The second patch adds the modules rdmsr and wrmsr, which register two commands 
+with the same name to read from and write to MSR.
+
+Currently, it lacks a GP# handler, and therefore accessing a reserved or 
+unimplemented MSR, results in a general protection exception and system reboot.
+
+Changes in v3:
+
+    - Add a cover letter to the patch series.
+    - In Makefile.core.def, leave only x86.
+    - Fixed incorrect #endif positioning.
+    - Fixed variable types and parameter parsing.
+    - Check that the CPU supports the MSR instructions.
+    - Add TODO comments indicating that a GP# handler should be implemented.
+    - Add a warning to the documentation, explaining that accessing a reserved
+      or unimplemented MSR address results in a general protection exception.
+
+Changes in v2:
+
+    - Patch all source code files with s/__asm__ __volatile__/asm volatile/g.
+    - Split the module in two (rdmsr/wrmsr).
+    - Include the wrmsr module in the forbidden modules efi list.
+    - Code indentation and cleanup.
+    - Copyright year update.
+    - Implicit casting mask removed.
+    - Use the same assembly code for x86 and x86_64.
+    - Add missing documentation.
+    - Patch submitted with Signed-off-by.
+
+
