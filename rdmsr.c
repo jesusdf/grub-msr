@@ -1,4 +1,4 @@
-/* rdmsr.c - Read CPU model-specific registers */
+/* rdmsr.c - Read CPU model-specific registers. */
 /*
  *  GRUB  --  GRand Unified Bootloader
  *  Copyright (C) 2019  Free Software Foundation, Inc.
@@ -24,9 +24,9 @@
 #include <grub/env.h>
 #include <grub/command.h>
 #include <grub/extcmd.h>
-#include <grub/i386/rdmsr.h>
 #include <grub/i18n.h>
-#include <grub/cpu/cpuid.h>
+#include <grub/i386/cpuid.h>
+#include <grub/i386/rdmsr.h>
 
 GRUB_MOD_LICENSE("GPLv3+");
 
@@ -78,11 +78,11 @@ grub_cmd_msr_read (grub_extcmd_context_t ctxt, int argc, char **argv)
 
     if (ctxt->state[0].set)
     {
-        grub_snprintf (buf, sizeof(buf), "%llx", value);
+        grub_snprintf (buf, sizeof(buf), "%llx", (unsigned long long) value);
         grub_env_set (ctxt->state[0].arg, buf);
     }
     else
-        grub_printf ("0x%llx\n", value);
+        grub_printf ("0x%llx\n", (unsigned long long) value);
 
     return GRUB_ERR_NONE;
 }

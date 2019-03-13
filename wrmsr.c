@@ -1,4 +1,4 @@
-/* wrmsr.c - Write CPU model-specific registers */
+/* wrmsr.c - Write CPU model-specific registers. */
 /*
  *  GRUB  --  GRand Unified Bootloader
  *  Copyright (C) 2019  Free Software Foundation, Inc.
@@ -24,16 +24,16 @@
 #include <grub/env.h>
 #include <grub/command.h>
 #include <grub/extcmd.h>
-#include <grub/i386/wrmsr.h>
 #include <grub/i18n.h>
-#include <grub/cpu/cpuid.h>
+#include <grub/i386/cpuid.h>
+#include <grub/i386/wrmsr.h>
 
 GRUB_MOD_LICENSE("GPLv3+");
 
 static grub_command_t cmd_write;
 
 static grub_err_t
-grub_cmd_msr_write (grub_command_t cmd, int argc, char **argv)
+grub_cmd_msr_write (grub_command_t cmd __attribute__ ((unused)), int argc, char **argv)
 {
     grub_uint32_t manufacturer[3], max_cpuid, a, b, c, features, addr;
     grub_uint64_t value;
