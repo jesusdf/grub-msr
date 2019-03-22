@@ -19,14 +19,19 @@
 #ifndef GRUB_WRMSR_H
 #define GRUB_WRMSR_H 1
 
-/* TODO: Add a general protection exception handler.
-         Accessing a reserved or unimplemented MSR address results in a GP#. */
+inline void grub_msr_write (grub_uint32_t msr_id, grub_uint64_t msr_value);
 
-extern inline void grub_msr_write(grub_uint32_t msr_id, grub_uint64_t msr_value)
+/*
+ * TODO: Add a general protection exception handler.
+ *       Accessing a reserved or unimplemented MSR address results in a GP#.
+ */
+
+inline void
+grub_msr_write (grub_uint32_t msr_id, grub_uint64_t msr_value)
 {
-    grub_uint32_t low = msr_value, high = msr_value >> 32;
+  grub_uint32_t low = msr_value, high = msr_value >> 32;
 
-    asm volatile ( "wrmsr" : : "c"(msr_id), "a"(low), "d"(high) );
+  asm volatile ("wrmsr" : : "c" (msr_id), "a" (low), "d" (high));
 }
 
 #endif /* GRUB_WRMSR_H */

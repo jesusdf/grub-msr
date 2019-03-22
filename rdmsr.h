@@ -19,16 +19,21 @@
 #ifndef GRUB_RDMSR_H
 #define GRUB_RDMSR_H 1
 
-/* TODO: Add a general protection exception handler.
-         Accessing a reserved or unimplemented MSR address results in a GP#. */
+inline grub_uint64_t grub_msr_read (grub_uint32_t msr_id);
 
-extern inline grub_uint64_t grub_msr_read (grub_uint32_t msr_id)
+/*
+ * TODO: Add a general protection exception handler.
+ *       Accessing a reserved or unimplemented MSR address results in a GP#.
+ */
+
+inline grub_uint64_t
+grub_msr_read (grub_uint32_t msr_id)
 {
-    grub_uint32_t low, high;
+  grub_uint32_t low, high;
 
-    asm volatile ( "rdmsr"  : "=a"(low), "=d"(high) : "c"(msr_id) );
+  asm volatile ("rdmsr" : "=a" (low), "=d" (high) : "c" (msr_id));
 
-    return ((grub_uint64_t)high << 32) | low;
+  return ((grub_uint64_t)high << 32) | low;
 }
 
 #endif /* GRUB_RDMSR_H */
