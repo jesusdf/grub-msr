@@ -1,4 +1,5 @@
-> These modules have been merged in [upstream GRUB git](https://git.savannah.gnu.org/cgit/grub.git/commit/?id=46f5d5134392384c45710554bfe717ffa9c6dd46), so there's no need to build them from this repository.
+|  :warning: | These modules have been merged in [upstream GRUB git](https://git.savannah.gnu.org/cgit/grub.git/commit/?id=46f5d5134392384c45710554bfe717ffa9c6dd46), so there's no need to build them from this repository. |
+|------------|-------------------------------------------------------------------------------------------------------------|
 
 # grub-msr
 grub2 msr modules to read (rdmsr) or write (wrmsr) from/to model-specific registers.
