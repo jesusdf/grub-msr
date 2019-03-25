@@ -19,8 +19,6 @@
 #ifndef GRUB_WRMSR_H
 #define GRUB_WRMSR_H 1
 
-inline void grub_msr_write (grub_uint32_t msr_id, grub_uint64_t msr_value);
-
 /*
  * TODO: Add a general protection exception handler.
  *       Accessing a reserved or unimplemented MSR address results in a GP#.
